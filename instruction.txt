@@ -1,0 +1,65 @@
+Hey chatgpt, my sir gave me a project. It’s the best chance to impress him and make him proud. It is a student Management system like kinda google classroom,. Firstly, there will be an index file. That will contain 3 buttons respectively admin login, founder login and student login. Then in the footer, here will be website founder credits Adib Ahnaf Azad (Leader, Developer), and Nahian Sadman Labib (Design advicer and documentation creater) for very modern and good design. Student, Admin and Founder dashboards will be different means there will be various kinds of features. Remember the Admin username and password will be the default, username: saleh-sir, password: 8-D; but only the admin can create students and founder info and login details from the admin dashboard. Also system to logout from all of the dashboard but add a login check function
+
+
+
+Design and things will be in the Admin Dashboard:
+
+Firstly, there will be a welcome message. Here will be contains add class. After clicking on add class button he will give a prompt alert, where he will enter the class name and the class will be created , at the side of the class there will be delete class button. Also 2 buttons to create student and student info and founder login and info to login and all created students and founders list will be shown. Then Also there will be a change password and reset password option as a button. The reset password will be always 13037. Then here will be students and founder class joining requests of the students and founders. Onclicking on a specific class, he will enter into the class, there will be a class code created by random and will be fixed only can see the admin. Then here will be four sections, clicking on section that section will be opend. These sections are assignmets Dues, group messages, Students list and exam result uploaded by founders. Admin can see these 4 features in the specific class. Cant add dues but send messages,pictures to group messages. Remember, All classes can be different from students and all things. In the students section admin can delete student from delete button. And also crear all messages from group messages.
+
+
+
+The founder’s dashboard:
+
+The founder will login in through admin’s created login info. After login he will be render to his own dashboard, There will be a button called join class as founder. He will join the class from admin’s created class’s code. Add founder will be added in that class of the code of the classs. But need to wait to accept request from admin.It will show pending, After accepting request from admin founder can access class and show that class he has joined by the code. Onclicking on a specific class he will enter into the class. He can access 4 sections – Create dues, Group messages, Publish result by exam name and pdf. Founder can send message or pictures and send, also delete his message. Assignment due is like google classroom like only founder can add a due and post it, all students and admin can see this, after posting a due here will be a button shown called see uploads, here founder can see will has submitted assignment answer of a specific due and set a time, after this time students cant send assignrnt answer. And founder can see all answers by name o fthe student.
+
+
+
+The student dashboard: 
+
+It is same, The admin will create student and create his login info then he will login, Then he can see join class option then he can join by entering class code from admin and enter the class. Then he can see students list only not can delete or edit. There will be 4 sections for students: dues, see result, group messages, see students list. In the dues, He can see dues that founder gave within a specific time. In student dashboard, here will be a button inside the due div, submit due option. Onclick on this button he can upload his pdf or image and submit. But can’t see other students submits, it can only see the founders. After the specific time of submission the student can’t submit and show expired text. Also can send and see group messages and delete his send messages. And also see result pdf from see result section that will upload the founder.
+
+
+
+
+
+Who can do what:
+
+
+
+Admin
+
+- Create and Remove class
+
+- Create a student account with Name, class, ID, password, username
+
+- Create a Founder by entering a username and password
+
+- Approve student on join class requests
+
+- Can reset group messages or delete specific messages of a student
+
+- Can see created classes and by tapping on a class admin can see all students list and delete them by tap on the button also see class dues, group chat 
+
+
+
+Founder/Teacher:
+
+-	Join the class as a teacher by entering the class code from the admin 
+
+-	Can message in the group message section
+
+-	Can publish exam results as pdf
+
+-	Can give due to submit student assignments or homeworks as pdf or image and set a specific time and date
+
+Student: 
+
+-Join the class by entering the class code. You need to wait until the admin accepts his request.
+
+- See and reply to group messages
+
+- Upload assignment to a specific due
+
+Conslution:
+
+****This was my simple instruction of a student management system like google classroom. Use a good font like “Söhne (woff2)sans-serif”and use the uploaded image color palate. And make it in php and mysql and if you need js you can use. But need to execute all the features of all the dashboads. And design it like a professional because it’s my sir’s project. It must to be responsive and pdf, image, details, login info will saved in mysql. Make the website faster and well optimized. And give me the lists of all folders and files and good codes plzz. also database code and all files code with a dark theme color pallate. The design should be top notch. All functionality have to work. Specially- Createing class and remove, see class on tap, join classs by code, dues, messages, student remove, student and founder creating all functions descripe at the top. also the admin approve to join with codes, class details on click . all liests are at the top... also set admin username and password as default as I said at the top of this promt. and design in bootstrap as cdn. Give me folder and file lists and all files code. design it very good according to a dark color pallate and all functionality should work.
