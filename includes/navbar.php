@@ -4,6 +4,7 @@
         <div class="flex space-x-4">
             <?php if (isset($_SESSION['role'])): ?>
                 <a href="../logout.php" class="text-white">Logout</a>
+                <a href="index.php" class="text-white">Dashboard</a>
             <?php endif; ?>
         </div>
     </div>

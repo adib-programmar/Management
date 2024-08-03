@@ -26,6 +26,7 @@ CREATE TABLE dues (
     due_title VARCHAR(100),
     due_description TEXT,
     due_date DATETIME,
+    attachment VARCHAR(255),
     created_by INT,
     FOREIGN KEY (class_id) REFERENCES classes(id),
     FOREIGN KEY (created_by) REFERENCES users(id)
