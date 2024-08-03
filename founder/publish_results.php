@@ -38,9 +38,9 @@ $results = $conn->query("SELECT * FROM results WHERE class_id='$class_id'");
 </head>
 <body class="bg-gray-900 text-white">
     <?php include '../includes/navbar.php'; ?>
-    <div class="container mx-auto mt-5">
-        <h2 class="text-2xl">Publish Results</h2>
-        <form action="" method="POST" enctype="multipart/form-data" class="mb-4">
+    <div class="container mx-auto mt-10 p-6 bg-gray-800 rounded-lg shadow-lg">
+        <h2 class="text-3xl font-bold mb-6">Publish Results</h2>
+        <form action="" method="POST" enctype="multipart/form-data" class="mb-6">
             <div class="mb-4">
                 <label for="exam_name" class="block text-sm font-bold mb-2">Exam Name</label>
                 <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="exam_name" name="exam_name" required>
@@ -51,16 +51,16 @@ $results = $conn->query("SELECT * FROM results WHERE class_id='$class_id'");
             </div>
             <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Publish</button>
         </form>
-        <h3 class="text-xl mt-5">Published Results</h3>
-        <ul class="list-group">
+        <h3 class="text-xl font-semibold mt-6 mb-4">Published Results</h3>
+        <ul class="space-y-4">
             <?php while ($result = $results->fetch_assoc()): ?>
-                <li class="list-group-item">
-                    <h5><?= htmlspecialchars($result['exam_name']) ?></h5>
-                    <a href="<?= $result['result_pdf'] ?>" target="_blank" class="text-blue-500 underline">View Result</a>
+                <li class="bg-gray-700 p-4 rounded shadow-md">
+                    <h5 class="text-lg font-bold text-yellow-300"><?= htmlspecialchars($result['exam_name']) ?></h5>
+                    <a href="<?= htmlspecialchars($result['result_pdf']) ?>" target="_blank" class="text-blue-400 underline hover:text-blue-600">View Result</a>
                 </li>
             <?php endwhile; ?>
         </ul>
-        <a href="index.php" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mt-4">Back</a>
+        <a href="index.php" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mt-6 inline-block">Back</a>
     </div>
     <?php include '../includes/footer.php'; ?>
 </body>

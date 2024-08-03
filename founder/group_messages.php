@@ -31,29 +31,28 @@ $messages = $conn->query("SELECT m.*, u.username FROM messages m JOIN users u ON
     <title>Group Messages</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/styles.css">
-</head>
-<body class="bg-gray-900 text-white">
+    <body class="bg-gray-900 text-white">
     <?php include '../includes/navbar.php'; ?>
-    <div class="container mx-auto mt-5">
-        <h2 class="text-2xl">Group Messages</h2>
-        <form action="" method="POST" class="mb-4">
+    <div class="container mx-auto mt-5 p-5 bg-gray-800 rounded shadow-lg">
+        <h2 class="text-2xl font-bold mb-5">Group Messages</h2>
+        <form action="" method="POST" class="mb-6">
             <div class="mb-4">
                 <label for="message" class="block text-sm font-bold mb-2">Message</label>
                 <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="message" name="message" rows="3" required></textarea>
             </div>
             <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Send</button>
         </form>
-        <h3 class="text-xl mt-5">Messages</h3>
-        <ul class="list-group">
+        <h3 class="text-xl font-semibold mt-5 mb-3">Messages</h3>
+        <ul class="list-group bg-gray-700 p-4 rounded shadow-inner">
             <?php while ($msg = $messages->fetch_assoc()): ?>
-                <li class="list-group-item">
-                    <strong><?= htmlspecialchars($msg['username']) ?>:</strong>
-                    <p><?= htmlspecialchars($msg['message']) ?></p>
-                    <small class="text-gray-500"><?= $msg['created_at'] ?></small>
+                <li class="list-group-item mb-3 p-4 bg-gray-600 rounded">
+                    <strong class="block text-yellow-300"><?= htmlspecialchars($msg['username']) ?>:</strong>
+                    <p class="text-gray-200"><?= htmlspecialchars($msg['message']) ?></p>
+                    <small class="text-gray-400"><?= $msg['created_at'] ?></small>
                 </li>
             <?php endwhile; ?>
         </ul>
-        <a href="index.php" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mt-4">Back</a>
+        <a href="index.php" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mt-6 inline-block">Back</a>
     </div>
     <?php include '../includes/footer.php'; ?>
 </body>

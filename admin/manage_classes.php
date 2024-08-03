@@ -15,9 +15,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['create_class'])) {
 
     $sql = "INSERT INTO classes (class_name, class_code, created_by) VALUES ('$class_name', '$class_code', '$admin_id')";
     if ($conn->query($sql) === TRUE) {
-        echo "Class created successfully";
+        echo "<p class='bg-green-500 text-white p-2'>Class created successfully</p>";
     } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+        echo "<p class='bg-red-500 text-white p-2'>Error: " . $sql . "<br>" . $conn->error . "</p>";
     }
 }
 ?>
@@ -33,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['create_class'])) {
 <body class="bg-gray-900 text-white">
     <?php include '../includes/navbar.php'; ?>
     <div class="container mx-auto mt-5">
-        <h2 class="text-2xl">Manage Classes</h2>
+        <h2 class="text-2xl mb-4">Manage Classes</h2>
         <form id="create-class-form" action="" method="POST" class="mb-4">
             <div class="mb-3">
                 <label for="class_name" class="block text-sm font-bold mb-2">Class Name</label>
@@ -42,10 +42,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['create_class'])) {
             <button type="submit" name="create_class" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Create Class</button>
         </form>
         <h3 class="text-xl mt-5">Existing Classes</h3>
-        <ul id="class-list" class="list-group">
+        <ul id="class-list" class="list-none p-0">
             <!-- JavaScript will populate this list -->
         </ul>
-        <a href="index.php" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mt-4">Back</a>
+        <a href="index.php" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mt-4 inline-block">Back</a>
     </div>
     <?php include '../includes/footer.php'; ?>
     <script src="../assets/js/scripts.js"></script>

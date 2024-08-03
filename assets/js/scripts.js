@@ -7,10 +7,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 classList.innerHTML = '';
                 data.forEach(classItem => {
                     const listItem = document.createElement('li');
-                    listItem.className = 'list-group-item d-flex justify-content-between align-items-center';
+                    listItem.className = 'bg-gray-800 mb-2 rounded p-4 flex justify-between items-center';
                     listItem.innerHTML = `
-                        ${classItem.class_name} (${classItem.class_code})
-                        <button class="btn btn-danger" onclick="deleteClass(${classItem.id})">Delete</button>
+                        <a href="view_classes.php?class_id=${classItem.id}" class="text-white">${classItem.class_name} (${classItem.class_code})</a>
+                        <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" onclick="deleteClass(${classItem.id})">Delete</button>
                     `;
                     classList.appendChild(listItem);
                 });

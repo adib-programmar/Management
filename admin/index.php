@@ -32,8 +32,8 @@ include '../includes/header.php';  // Include the header
                 <a href="approve_requests.php" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded">Approve Join Requests</a>
             </div>
             <div class="bg-gray-800 p-4 rounded shadow">
-                <h3 class="text-xl mb-2">Reset Password</h3>
-                <a href="reset_password.php" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Reset User Password</a>
+                <h3 class="text-xl mb-2">Change Password</h3>
+                <a href="reset_password.php" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Change User Password</a>
             </div>
         </div>
     </div>

@@ -2,8 +2,8 @@
 include '../config.php';
 session_start();
 
-$admin_id = $_SESSION['user_id'];
-$classes = $conn->query("SELECT * FROM classes WHERE created_by='$admin_id'");
+// Fetch all classes, regardless of who created them
+$classes = $conn->query("SELECT * FROM classes");
 
 $class_list = [];
 while ($class = $classes->fetch_assoc()) {
