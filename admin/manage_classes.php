@@ -45,6 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['create_class'])) {
         <ul id="class-list" class="list-group">
             <!-- JavaScript will populate this list -->
         </ul>
+        <a href="index.php" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mt-4">Back</a>
     </div>
     <?php include '../includes/footer.php'; ?>
     <script src="../assets/js/scripts.js"></script>

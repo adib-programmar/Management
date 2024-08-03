@@ -45,6 +45,7 @@ $students_and_founders = $conn->query("SELECT * FROM users WHERE role IN ('stude
             </div>
             <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Reset Password</button>
         </form>
+        <a href="index.php" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mt-4">Back</a>
     </div>
     <?php include '../includes/footer.php'; ?>
 </body>

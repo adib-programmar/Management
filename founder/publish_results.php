@@ -60,6 +60,7 @@ $results = $conn->query("SELECT * FROM results WHERE class_id='$class_id'");
                 </li>
             <?php endwhile; ?>
         </ul>
+        <a href="index.php" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mt-4">Back</a>
     </div>
     <?php include '../includes/footer.php'; ?>
 </body>

@@ -31,9 +31,11 @@ $joined_classes = $conn->query("SELECT c.* FROM classes c JOIN users u ON c.clas
                     <?= htmlspecialchars($class['class_name']) ?>
                     <a href="submit_due.php?class_id=<?= $class['id'] ?>" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Submit Due</a>
                     <a href="group_messages.php?class_id=<?= $class['id'] ?>" class="bg-pink-500 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded">Group Messages</a>
+                    <a href="view_result.php?class_id=<?= $class['id'] ?>" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">View Result</a>
                 </li>
             <?php endwhile; ?>
         </ul>
+        <a href="index.php" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mt-4">Back</a>
     </div>
     <?php include '../includes/footer.php'; ?>
 </body>

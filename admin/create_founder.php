@@ -18,6 +18,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }
 }
+
+$founders = $conn->query("SELECT * FROM users WHERE role='founder'");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -43,6 +45,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
             <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Create</button>
         </form>
+        <h3 class="text-xl mt-5">Created Founders</h3>
+        <ul class="list-group">
+            <?php while ($founder = $founders->fetch_assoc()): ?>
+                <li class="list-group-item">
+                    <strong><?= htmlspecialchars($founder['username']) ?></strong>
+                </li>
+            <?php endwhile; ?>
+        </ul>
+        <a href="index.php" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mt-4">Back</a>
     </div>
     <?php include '../includes/footer.php'; ?>
 </body>
