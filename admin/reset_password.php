@@ -44,43 +44,47 @@ $users_result = $conn->query("SELECT id, username FROM users");
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/styles.css">
 </head>
-<body class="bg-gray-900 text-white">
+<body class="bg-gradient-to-r from-red-900 to-orange-900 text-white min-h-screen">
     <?php include '../includes/navbar.php'; ?>
-    <div class="container mx-auto mt-5">
-        <h2 class="text-2xl mb-4">Reset Password</h2>
+    <div class="container mx-auto px-4 py-8">
+        <h2 class="text-3xl font-bold mb-8 text-center">Reset Password</h2>
 
-        <?php if ($error_message): ?>
-            <div class="bg-red-500 text-white p-3 rounded mb-4">
-                <?= htmlspecialchars($error_message ?? '', ENT_QUOTES, 'UTF-8') ?>
-            </div>
-        <?php endif; ?>
+        <div class="max-w-md mx-auto bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg rounded-xl p-8 shadow-2xl">
+            <?php if ($error_message): ?>
+                <div class="bg-red-500 bg-opacity-75 text-white p-4 rounded-lg mb-6">
+                    <?= htmlspecialchars($error_message, ENT_QUOTES, 'UTF-8') ?>
+                </div>
+            <?php endif; ?>
 
-        <?php if ($success_message): ?>
-            <div class="bg-green-500 text-white p-3 rounded mb-4">
-                <?= htmlspecialchars($success_message ?? '', ENT_QUOTES, 'UTF-8') ?>
-            </div>
-        <?php endif; ?>
+            <?php if ($success_message): ?>
+                <div class="bg-green-500 bg-opacity-75 text-white p-4 rounded-lg mb-6">
+                    <?= htmlspecialchars($success_message, ENT_QUOTES, 'UTF-8') ?>
+                </div>
+            <?php endif; ?>
 
-        <form action="" method="POST">
-            <div class="mb-4">
-                <label for="user_id" class="block text-sm font-bold mb-2">Select User</label>
-                <select class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="user_id" name="user_id" required>
-                    <option value="">Select a user</option>
-                    <?php while ($user = $users_result->fetch_assoc()): ?>
-                        <option value="<?= htmlspecialchars($user['id'], ENT_QUOTES, 'UTF-8') ?>">
-                            <?= htmlspecialchars($user['username'] ?? '', ENT_QUOTES, 'UTF-8') ?>
-                        </option>
-                    <?php endwhile; ?>
-                </select>
-            </div>
-            <div class="mb-4">
-                <label for="new_password" class="block text-sm font-bold mb-2">New Password</label>
-                <input type="password" id="new_password" name="new_password" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
-            </div>
-            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Reset Password</button>
-        </form>
+            <form action="" method="POST" class="space-y-6">
+                <div>
+                    <label for="user_id" class="block text-sm font-medium mb-2">Select User</label>
+                    <select class="w-full px-4 py-2 rounded-md bg-gray-800 border border-gray-700 focus:border-orange-500 focus:ring focus:ring-orange-200 focus:ring-opacity-50" id="user_id" name="user_id" required>
+                        <option value="">Select a user</option>
+                        <?php while ($user = $users_result->fetch_assoc()): ?>
+                            <option value="<?= htmlspecialchars($user['id'], ENT_QUOTES, 'UTF-8') ?>">
+                                <?= htmlspecialchars($user['username'], ENT_QUOTES, 'UTF-8') ?>
+                            </option>
+                        <?php endwhile; ?>
+                    </select>
+                </div>
+                <div>
+                    <label for="new_password" class="block text-sm font-medium mb-2">New Password</label>
+                    <input type="password" id="new_password" name="new_password" class="w-full px-4 py-2 rounded-md bg-gray-800 border border-gray-700 focus:border-orange-500 focus:ring focus:ring-orange-200 focus:ring-opacity-50" required>
+                </div>
+                <button type="submit" class="w-full bg-orange-600 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded-md transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105">Reset Password</button>
+            </form>
+        </div>
 
-        <a href="index.php" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mt-4 inline-block">Back</a>
+        <div class="mt-8 text-center">
+            <a href="index.php" class="inline-block bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-6 rounded-md transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105">Back to Dashboard</a>
+        </div>
     </div>
     <?php include '../includes/footer.php'; ?>
 </body>
