@@ -20,14 +20,14 @@ CREATE TABLE classes (
     FOREIGN KEY (created_by) REFERENCES users(id)
 );
 
-CREATE TABLE dues (
+CREATE TABLE IF NOT EXISTS dues (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    class_id INT,
-    due_title VARCHAR(100),
-    due_description TEXT,
-    due_date DATETIME,
+    class_id INT NOT NULL,
+    due_title VARCHAR(255) NOT NULL,
+    due_description TEXT NOT NULL,
+    due_date DATETIME NOT NULL,
     attachment VARCHAR(255),
-    created_by INT,
+    created_by INT NOT NULL,
     FOREIGN KEY (class_id) REFERENCES classes(id),
     FOREIGN KEY (created_by) REFERENCES users(id)
 );

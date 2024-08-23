@@ -13,9 +13,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $sql = "UPDATE users SET class_code='$class_code', approved=0 WHERE id='$student_id'";
     if ($conn->query($sql) === TRUE) {
-        echo "Join request sent successfully. Waiting for admin approval.";
+        echo "<div class='text-center text-green-500 font-bold mt-6'>Join request sent successfully. Waiting for admin approval.</div>";
     } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+        echo "<div class='text-center text-red-500 font-bold mt-6'>Error: " . $sql . "<br>" . $conn->error . "</div>";
     }
 }
 ?>
@@ -30,16 +30,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body class="bg-gray-900 text-white">
     <?php include '../includes/navbar.php'; ?>
-    <div class="container mx-auto mt-5">
-        <h2 class="text-2xl">Join Class</h2>
-        <form action="" method="POST" class="w-1/2 mx-auto mt-5">
-            <div class="mb-4">
-                <label for="class_code" class="block text-sm font-bold mb-2">Class Code</label>
-                <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="class_code" name="class_code" required>
+    <div class="container mx-auto mt-10 p-8 bg-gray-800 rounded-lg shadow-xl max-w-lg">
+        <h2 class="text-3xl font-extrabold text-center text-blue-400 mb-8">Join a Class</h2>
+        <form action="" method="POST" class="space-y-6">
+            <div>
+                <label for="class_code" class="block text-lg font-medium text-yellow-300 mb-2">Class Code</label>
+                <input type="text" id="class_code" name="class_code" required 
+                    class="w-full p-4 rounded-lg bg-gray-700 text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition">
             </div>
-            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Join</button>
+            <button type="submit" class="w-full bg-blue-600 hover:bg-blue-800 text-white font-bold py-3 px-4 rounded-lg transition-colors duration-300">Join Class</button>
         </form>
-        <a href="index.php" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mt-4">Back</a>
+        <a href="index.php" class="block text-center mt-6 text-sm text-gray-400 hover:text-gray-200 transition-colors duration-300">Back to Home</a>
     </div>
     <?php include '../includes/footer.php'; ?>
 </body>

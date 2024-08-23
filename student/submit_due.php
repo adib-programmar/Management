@@ -2,12 +2,13 @@
 include '../config.php';
 session_start();
 
+// Ensure the user is a student
 if ($_SESSION['role'] != 'student') {
     header("Location: ../index.php");
     exit();
 }
 
-$class_id = $_GET['class_id'];
+$class_id = $_GET['class_id'];  // Assuming class_id is passed in the URL
 $student_id = $_SESSION['user_id'];
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -28,6 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
+// Fetch all dues for the specific class
 $dues = $conn->query("SELECT * FROM dues WHERE class_id='$class_id'");
 ?>
 <!DOCTYPE html>
@@ -41,6 +43,7 @@ $dues = $conn->query("SELECT * FROM dues WHERE class_id='$class_id'");
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function() {
+            // Fetch and display due details when a due is selected
             $("#due_id").change(function() {
                 var due_id = $(this).val();
                 $.ajax({
@@ -57,6 +60,7 @@ $dues = $conn->query("SELECT * FROM dues WHERE class_id='$class_id'");
                         var currentDate = new Date();
                         var dueDate = new Date(due.due_date);
 
+                        // Disable submission button if due date has passed
                         if (currentDate > dueDate) {
                             $("#submit_button").prop("disabled", true).css("background-color", "red");
                         } else {
@@ -66,7 +70,8 @@ $dues = $conn->query("SELECT * FROM dues WHERE class_id='$class_id'");
                 });
             });
 
-            $("#due_id").change(); // Trigger change to load details for the first due
+            // Trigger change event to load details for the first due by default
+            $("#due_id").change();
         });
     </script>
 </head>

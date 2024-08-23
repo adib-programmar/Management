@@ -7,7 +7,6 @@ if ($_SESSION['role'] != 'admin') {
     exit();
 }
 
-// Fetch all classes, regardless of who created them
 $classes = $conn->query("SELECT * FROM classes");
 if (!$classes) {
     die("Error fetching classes: " . $conn->error);
@@ -19,26 +18,48 @@ if (!$classes) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>View Created Classes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/styles.css">
+    <style>
+        body { font-family: 'Poppins', sans-serif; background-color: #0f172a; color: #e2e8f0; }
+        .class-card { transition: all 0.3s ease; }
+        .class-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); }
+    </style>
 </head>
-<body class="bg-gray-900 text-white">
+<body class="bg-gray-900 text-gray-100">
     <?php include '../includes/navbar.php'; ?>
-    <div class="container mx-auto mt-5">
-        <h2 class="text-2xl mb-4">Created Classes</h2>
-        <ul class="list-none p-0 mt-5">
+    <div class="container mx-auto mt-10 p-6">
+        <h2 class="text-3xl font-bold mb-8 text-center text-blue-400"><i class="fas fa-chalkboard mr-2"></i>Created Classes</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <?php while ($class = $classes->fetch_assoc()): ?>
-                <li class="bg-gray-800 mb-2 rounded p-4">
-                    <h3 class="text-xl"><?= htmlspecialchars($class['class_name']) ?></h3>
-                    <p><strong>Class Code:</strong> <?= htmlspecialchars($class['class_code']) ?></p>
-                    <a href="view_dues.php?class_id=<?= $class['id'] ?>" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-2 inline-block">Manage Dues</a>
-                    <a href="view_results.php?class_id=<?= $class['id'] ?>" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-2 inline-block">Publish Results</a>
-                    <a href="group_messages.php?class_id=<?= $class['id'] ?>" class="bg-pink-500 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded mt-2 inline-block">Group Messages</a>
-                    <a href="view_students.php?class_id=<?= $class['id'] ?>" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded mt-2 inline-block">View Students</a>
-                </li>
+                <div class="class-card bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2 text-blue-300"><?= htmlspecialchars($class['class_name']) ?></h3>
+                        <p class="text-gray-400 mb-4"><strong>Class Code:</strong> <?= htmlspecialchars($class['class_code']) ?></p>
+                        <div class="flex flex-wrap gap-2">
+                            <a href="view_dues.php?class_id=<?= $class['id'] ?>" class="bg-green-500 hover:bg-green-600 text-white text-sm font-bold py-2 px-4 rounded-full transition duration-300">
+                                <i class="fas fa-money-bill-wave mr-1"></i> Manage Dues
+                            </a>
+                            <a href="view_results.php?class_id=<?= $class['id'] ?>" class="bg-blue-500 hover:bg-blue-600 text-white text-sm font-bold py-2 px-4 rounded-full transition duration-300">
+                                <i class="fas fa-chart-bar mr-1"></i> Results
+                            </a>
+                            <a href="group_messages.php?class_id=<?= $class['id'] ?>" class="bg-pink-500 hover:bg-pink-600 text-white text-sm font-bold py-2 px-4 rounded-full transition duration-300">
+                                <i class="fas fa-comments mr-1"></i> Messages
+                            </a>
+                            <a href="view_students.php?class_id=<?= $class['id'] ?>" class="bg-yellow-500 hover:bg-yellow-600 text-white text-sm font-bold py-2 px-4 rounded-full transition duration-300">
+                                <i class="fas fa-users mr-1"></i> Students
+                            </a>
+                        </div>
+                    </div>
+                </div>
             <?php endwhile; ?>
-        </ul>
-        <a href="index.php" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mt-4">Back</a>
+        </div>
+        <div class="text-center mt-8">
+            <a href="index.php" class="bg-gray-700 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-lg transition duration-300">
+                <i class="fas fa-arrow-left mr-2"></i>Back to Dashboard
+            </a>
+        </div>
     </div>
     <?php include '../includes/footer.php'; ?>
 </body>

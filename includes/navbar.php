@@ -1,4 +1,4 @@
-<nav class="bg-gray-800 p-4 shadow-lg">
+<nav class="bg-gradient-to-r from-blue-900 to-purple-900 shadow-lg p-4 ">
     <div class="container mx-auto flex justify-between items-center">
         <a class="text-white font-bold text-xl" href="#">Student Management</a>
         <div class="flex space-x-4">

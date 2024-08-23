@@ -29,31 +29,77 @@ $messages = $conn->query("SELECT m.*, u.username FROM messages m JOIN users u ON
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Group Messages</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/styles.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #1a202c;
+            color: #e2e8f0;
+        }
+        .chat-container {
+            height: calc(100vh - 200px);
+            background: linear-gradient(120deg, #2a4365, #1a202c);
+            border-radius: 0.75rem;
+            overflow-y: auto;
+            padding: 1rem;
+        }
+        .message-bubble {
+            max-width: 70%;
+            word-wrap: break-word;
+            padding: 0.75rem;
+            border-radius: 1rem;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+            font-size: 0.875rem;
+        }
+        .message-bubble.student {
+            background-color: #4a5568;
+            color: #edf2f7;
+        }
+        .message-bubble.other {
+            background-color: #2c5282;
+            color: #e2e8f0;
+        }
+        .message-input {
+            background-color: #2d3748;
+            border-radius: 1rem;
+            padding: 0.75rem;
+            font-size: 0.875rem;
+            color: #e2e8f0;
+        }
+        .message-input:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px #2b6cb0;
+        }
+    </style>
 </head>
-<body class="bg-gray-900 text-white">
+<body class="bg-gray-900 text-gray-100">
     <?php include '../includes/navbar.php'; ?>
-    <div class="container mx-auto mt-5 p-5 bg-gray-800 rounded shadow-lg">
-        <h2 class="text-2xl font-bold mb-5">Group Messages</h2>
-        <form action="" method="POST" class="mb-4">
-            <div class="mb-4">
-                <label for="message" class="block text-sm font-bold mb-2">Message</label>
-                <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="message" name="message" rows="3" required></textarea>
+    <div class="container mx-auto mt-4 p-4">
+        <h2 class="text-3xl font-bold mb-4 text-center text-blue-400"><i class="fas fa-comments mr-2"></i>Group Chat</h2>
+        <div class="bg-gray-800 rounded-lg shadow-xl">
+            <div class="chat-container scrollbar-hide">
+                <?php while ($msg = $messages->fetch_assoc()): ?>
+                    <div class="flex <?= $msg['user_id'] == $student_id ? 'justify-end' : 'justify-start' ?> mb-4">
+                        <div class="message-bubble <?= $msg['user_id'] == $student_id ? 'student' : 'other' ?>">
+                            <p class="font-bold"><?= htmlspecialchars($msg['username']) ?></p>
+                            <p class="mt-2"><?= htmlspecialchars($msg['message']) ?></p>
+                            <p class="text-xs text-gray-400 mt-1"><?= date('H:i', strtotime($msg['created_at'])) ?></p>
+                        </div>
+                    </div>
+                <?php endwhile; ?>
             </div>
-            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Send</button>
-        </form>
-        <h3 class="text-xl mt-5 font-semibold">Messages</h3>
-        <ul class="list-group space-y-4">
-            <?php while ($msg = $messages->fetch_assoc()): ?>
-                <li class="list-group-item bg-gray-700 p-4 rounded shadow">
-                    <strong class="text-blue-400"><?= htmlspecialchars($msg['username']) ?>:</strong>
-                    <p class="mt-2"><?= htmlspecialchars($msg['message']) ?></p>
-                    <small class="text-gray-500 block mt-1"><?= $msg['created_at'] ?></small>
-                </li>
-            <?php endwhile; ?>
-        </ul>
-        <a href="index.php" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mt-4">Back</a>
+            <form action="" method="POST" class="bg-gray-900 p-4 flex items-center">
+                <input type="text" name="message" class="message-input flex-grow mr-4" placeholder="Type a message..." required>
+                <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white rounded-full p-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </form>
+        </div>
+        <a href="index.php" class="bg-gray-700 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded mt-4 inline-block transition duration-300">
+            <i class="fas fa-arrow-left mr-2"></i>Back
+        </a>
     </div>
     <?php include '../includes/footer.php'; ?>
 </body>
