@@ -19,7 +19,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['leave_class'])) {
     }
 }
 
-$joined_classes = $conn->query("SELECT c.* FROM classes c JOIN users u ON c.class_code = u.class_code WHERE u.id='$student_id' AND u.approved=1");
+$joined_classes = $conn->query("
+    SELECT c.*, 
+           GROUP_CONCAT(DISTINCT u.username SEPARATOR ', ') AS founder_usernames
+    FROM classes c
+    JOIN users u ON c.class_code = u.class_code AND u.role = 'founder'
+    JOIN users s ON c.class_code = s.class_code
+    WHERE s.id='$student_id' AND s.approved=1
+    GROUP BY c.id
+");
+
+if (!$joined_classes) {
+    die("Error fetching classes: " . $conn->error);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -30,6 +42,7 @@ $joined_classes = $conn->query("SELECT c.* FROM classes c JOIN users u ON c.clas
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="shortcut icon" href="student.png" type="image/x-icon">
     <style>
         body {
             font-family: 'Poppins', sans-serif;
@@ -61,6 +74,9 @@ $joined_classes = $conn->query("SELECT c.* FROM classes c JOIN users u ON c.clas
                 <div class="card rounded-lg shadow-lg overflow-hidden">
                     <div class="p-6">
                         <h4 class="text-xl font-semibold mb-2"><?= htmlspecialchars($class['class_name']) ?></h4>
+                        <p class="text-sm text-gray-400 mb-4">
+                            <strong>Founder(s):</strong> <?= htmlspecialchars($class['founder_usernames'] ?: 'Unknown') ?>
+                        </p>
                         <div class="flex flex-wrap gap-2">
                             <a href="submit_due.php?class_id=<?= $class['id'] ?>" class="bg-blue-500 hover:bg-blue-600 text-white text-sm font-bold py-2 px-4 rounded-full transition duration-300">
                                 <i class="fas fa-clipboard-list mr-1"></i> Submit Due

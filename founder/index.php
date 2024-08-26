@@ -19,11 +19,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['leave_class'])) {
     }
 }
 
-$joined_classes = $conn->query("SELECT c.*, 
-                                       (SELECT username FROM users WHERE role='founder' AND class_code=c.class_code LIMIT 1) AS founder_username
-                                FROM classes c 
-                                JOIN users u ON c.class_code = u.class_code 
-                                WHERE u.id='$founder_id' AND u.approved=1");
+$joined_classes = $conn->query("
+    SELECT c.*, 
+           GROUP_CONCAT(DISTINCT u.username SEPARATOR ', ') AS founder_usernames
+    FROM classes c
+    JOIN users u ON c.class_code = u.class_code AND u.role = 'founder'
+    WHERE c.class_code IN (SELECT class_code FROM users WHERE id='$founder_id' AND approved=1)
+    GROUP BY c.id
+");
+
+if (!$joined_classes) {
+    die("Error fetching classes: " . $conn->error);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -34,6 +41,7 @@ $joined_classes = $conn->query("SELECT c.*,
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="shortcut icon" href="founder.png" type="image/x-icon">
     <style>
         body {
             font-family: 'Poppins', sans-serif;
@@ -65,7 +73,9 @@ $joined_classes = $conn->query("SELECT c.*,
                 <div class="card rounded-lg shadow-lg overflow-hidden">
                     <div class="p-6">
                         <h4 class="text-xl font-semibold mb-2"><?= htmlspecialchars($class['class_name'] ?? '') ?></h4>
-                        <p class="text-sm text-gray-400 mb-4">Founder: <?= htmlspecialchars($class['founder_username'] ?? 'Unknown') ?></p>
+                        <p class="text-sm text-gray-400 mb-4">
+                            <strong>Founder(s):</strong> <?= htmlspecialchars($class['founder_usernames'] ?: 'Unknown') ?>
+                        </p>
                         <div class="flex flex-wrap gap-2">
                             <a href="manage_dues.php?class_id=<?= $class['id'] ?>" class="bg-blue-500 hover:bg-blue-600 text-white text-sm font-bold py-2 px-4 rounded-full transition duration-300">
                                 <i class="fas fa-money-bill-wave mr-1"></i> Manage Dues
@@ -75,6 +85,9 @@ $joined_classes = $conn->query("SELECT c.*,
                             </a>
                             <a href="group_messages.php?class_id=<?= $class['id'] ?>" class="bg-green-500 hover:bg-green-600 text-white text-sm font-bold py-2 px-4 rounded-full transition duration-300">
                                 <i class="fas fa-comments mr-1"></i> Group Chat
+                            </a>
+                            <a href="view_students.php?class_id=<?= $class['id'] ?>" class="bg-yellow-500 hover:bg-yellow-600 text-white text-sm font-bold py-2 px-4 rounded-full transition duration-300">
+                                <i class="fas fa-users mr-1"></i> View Students
                             </a>
                         </div>
                     </div>

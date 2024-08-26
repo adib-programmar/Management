@@ -43,6 +43,7 @@ $users_result = $conn->query("SELECT id, username FROM users");
     <title>Reset Password</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="shortcut icon" href="admin.png" type="image/x-icon">
 </head>
 <body class="bg-gradient-to-r from-red-900 to-orange-900 text-white min-h-screen">
     <?php include '../includes/navbar.php'; ?>

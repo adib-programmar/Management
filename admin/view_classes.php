@@ -7,7 +7,14 @@ if ($_SESSION['role'] != 'admin') {
     exit();
 }
 
-$classes = $conn->query("SELECT * FROM classes");
+$classes = $conn->query("
+    SELECT c.*, 
+           GROUP_CONCAT(DISTINCT u.username SEPARATOR ', ') AS founder_usernames
+    FROM classes c
+    LEFT JOIN users u ON c.class_code = u.class_code AND u.role = 'founder'
+    GROUP BY c.id
+");
+
 if (!$classes) {
     die("Error fetching classes: " . $conn->error);
 }
@@ -21,6 +28,7 @@ if (!$classes) {
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="shortcut icon" href="admin.png" type="image/x-icon">
     <style>
         body { font-family: 'Poppins', sans-serif; background-color: #0f172a; color: #e2e8f0; }
         .class-card { transition: all 0.3s ease; }
@@ -36,7 +44,10 @@ if (!$classes) {
                 <div class="class-card bg-gray-800 rounded-lg shadow-lg overflow-hidden">
                     <div class="p-6">
                         <h3 class="text-xl font-semibold mb-2 text-blue-300"><?= htmlspecialchars($class['class_name']) ?></h3>
-                        <p class="text-gray-400 mb-4"><strong>Class Code:</strong> <?= htmlspecialchars($class['class_code']) ?></p>
+                        <p class="text-gray-400 mb-2"><strong>Class Code:</strong> <?= htmlspecialchars($class['class_code']) ?></p>
+                        <p class="text-sm text-gray-400 mb-4"> 
+                            <strong>Founder(s):</strong> <?= htmlspecialchars($class['founder_usernames'] ?: 'Unknown') ?>
+                        </p>
                         <div class="flex flex-wrap gap-2">
                             <a href="view_dues.php?class_id=<?= $class['id'] ?>" class="bg-green-500 hover:bg-green-600 text-white text-sm font-bold py-2 px-4 rounded-full transition duration-300">
                                 <i class="fas fa-money-bill-wave mr-1"></i> Manage Dues

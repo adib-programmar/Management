@@ -27,6 +27,7 @@ CREATE TABLE IF NOT EXISTS dues (
     due_description TEXT NOT NULL,
     due_date DATETIME NOT NULL,
     attachment VARCHAR(255),
+    ALTER TABLE dues MODIFY COLUMN due_date DATETIME;
     created_by INT NOT NULL,
     FOREIGN KEY (class_id) REFERENCES classes(id),
     FOREIGN KEY (created_by) REFERENCES users(id)

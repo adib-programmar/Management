@@ -38,6 +38,7 @@ $pending_requests = $conn->query("SELECT users.*, classes.class_name FROM users 
     <title>Approve Requests</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="shortcut icon" href="admin.png" type="image/x-icon">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
         body {

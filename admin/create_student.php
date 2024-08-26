@@ -41,6 +41,7 @@ $students = $conn->query("SELECT * FROM users WHERE role='student'");
     <title>Create Student</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="shortcut icon" href="admin.png" type="image/x-icon">
 </head>
 <body class="bg-gradient-to-br from-gray-900 via-green-900 to-teal-900 min-h-screen text-white">
     <?php include '../includes/navbar.php'; ?>

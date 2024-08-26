@@ -22,6 +22,7 @@ if (!$results) {
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="shortcut icon" href="admin.png" type="image/x-icon">
     <style>
         body { font-family: 'Poppins', sans-serif; background-color: #0f172a; color: #e2e8f0; }
         .result-card { transition: all 0.3s ease; }

@@ -24,8 +24,13 @@ if (isset($_GET['due_id'])) {
     echo json_encode([
         'due_title' => htmlspecialchars($due_title),
         'due_description' => htmlspecialchars($due_description),
-        'due_date' => htmlspecialchars($due_date),
+        'due_date' => $due_date,
         'attachment' => htmlspecialchars($attachment)
+    ]);
+} else {
+    // If no due_id is provided, return an error
+    echo json_encode([
+        'error' => 'No due_id provided'
     ]);
 }
 ?>

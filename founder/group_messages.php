@@ -32,6 +32,8 @@ $messages = $conn->query("SELECT m.*, u.username FROM messages m JOIN users u ON
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="shortcut icon" href="founder.png" type="image/x-icon">
+
     <style>
         body {
             font-family: 'Roboto', sans-serif;
@@ -40,9 +42,9 @@ $messages = $conn->query("SELECT m.*, u.username FROM messages m JOIN users u ON
         }
         .chat-container {
             height: calc(100vh - 200px);
-            background-image: url('https://i.pinimg.com/originals/85/70/f6/8570f6339d3189c96e340d47a581d3b8.jpg');
+            background-image: url('https://th.bing.com/th/id/OIP.r6uS0dq8NhL0IAGhWJBuwgHaNK?rs=1&pid=ImgDetMain');
             background-size: cover;
-            background-position: center;
+            background-position: top;
         }
         .message-bubble {
             max-width: 70%;

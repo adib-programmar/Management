@@ -11,6 +11,7 @@ $admin_id = $_SESSION['user_id'];
 include '../includes/header.php';
 ?>
 
+
 <div class="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 py-12 px-4 sm:px-6 lg:px-8">
     <div class="max-w-7xl mx-auto">
         <div class="text-center mb-12">

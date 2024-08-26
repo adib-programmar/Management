@@ -27,6 +27,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>Join Class</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="shortcut icon" href="student.png" type="image/x-icon">
+
 </head>
 <body class="bg-gray-900 text-white">
     <?php include '../includes/navbar.php'; ?>
