@@ -96,4 +96,3 @@ $pending_requests = $conn->query("SELECT users.*, classes.class_name FROM users 
     <?php include '../includes/footer.php'; ?>
 </body>
 </html>
-

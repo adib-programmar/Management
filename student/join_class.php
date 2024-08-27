@@ -41,6 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     class="w-full p-4 rounded-lg bg-gray-700 text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition">
             </div>
             <button type="submit" class="w-full bg-blue-600 hover:bg-blue-800 text-white font-bold py-3 px-4 rounded-lg transition-colors duration-300">Join Class</button>
+            <h3 text-center text-green-500 font-bold mt-6>Dont send request while joining in one class. It will be removed you from your joined classs. One account can join in only one account.</h3>
         </form>
         <a href="index.php" class="block text-center mt-6 text-sm text-gray-400 hover:text-gray-200 transition-colors duration-300">Back to Home</a>
     </div>

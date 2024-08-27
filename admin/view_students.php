@@ -15,8 +15,8 @@ $class_code = $class['class_code'];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['remove_student_id'])) {
     $student_id = $_POST['remove_student_id'];
-    // Update the user's class_code to NULL instead of deleting the account
-    $conn->query("UPDATE users SET class_code = NULL WHERE id='$student_id'");
+    // Update the user's class_code to NULL and set approved to FALSE
+    $conn->query("UPDATE users SET class_code = NULL, approved = FALSE WHERE id='$student_id'");
     header("Location: view_students.php?class_id=$class_id");
     exit();
 }

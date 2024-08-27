@@ -13,21 +13,45 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
     $class = $_POST['class'];
 
-    $sql = "INSERT INTO users (username, password, role, name, class_code) VALUES ('$username', '$password', 'student', '$name', '$class')";
-    if ($conn->query($sql) === TRUE) {
-        echo "Student created successfully";
+    $sql = "INSERT INTO users (username, password, role, name, class_code) VALUES (?, ?, 'student', ?, ?)";
+    if ($stmt = $conn->prepare($sql)) {
+        $stmt->bind_param('ssss', $username, $password, $name, $class);
+        if ($stmt->execute()) {
+            echo "Student created successfully";
+        } else {
+            echo "Error: " . $stmt->error;
+        }
+        $stmt->close();
     } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+        echo "Error: " . $conn->error;
     }
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['delete_id'])) {
     $delete_id = $_GET['delete_id'];
-    $sql = "DELETE FROM users WHERE id='$delete_id' AND role='student'";
-    if ($conn->query($sql) === TRUE) {
-        echo "Student deleted successfully";
+
+    // Step 1: Delete messages related to the student
+    $sql = "DELETE FROM messages WHERE user_id = ?";
+    if ($stmt = $conn->prepare($sql)) {
+        $stmt->bind_param('i', $delete_id);
+        $stmt->execute();
+        $stmt->close();
     } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+        echo "Error: " . $conn->error;
+    }
+
+    // Step 2: Delete the student
+    $sql = "DELETE FROM users WHERE id = ? AND role = 'student'";
+    if ($stmt = $conn->prepare($sql)) {
+        $stmt->bind_param('i', $delete_id);
+        if ($stmt->execute()) {
+            echo "Student deleted successfully";
+        } else {
+            echo "Error: " . $stmt->error;
+        }
+        $stmt->close();
+    } else {
+        echo "Error: " . $conn->error;
     }
 }
 
@@ -82,7 +106,7 @@ $students = $conn->query("SELECT * FROM users WHERE role='student'");
                                 <span class="ml-2"><?= htmlspecialchars($student['username']) ?></span>
                                 <span class="ml-2 text-teal-400">(<?= htmlspecialchars($student['class_code']) ?>)</span>
                             </div>
-                            <a href="?delete_id=<?= $student['id'] ?>" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-md transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105">Delete</a>
+                            <a href="?delete_id=<?= $student['id'] ?>" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-md transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105" onclick="return confirm('Are you sure you want to delete this student?');">Delete</a>
                         </li>
                     <?php endwhile; ?>
                 </ul>

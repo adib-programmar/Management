@@ -68,6 +68,8 @@ if (!$joined_classes) {
                 <i class="fas fa-plus-circle mr-2"></i>Join Class
             </button>
         </div>
+        <h3 class="text-center text-green-500 font-bold mt-6">Dont send request while joining in one class. It will be removed you from your joined classs. One account can join in only one account.</h3>
+        
         <h3 class="text-2xl font-semibold mb-6 text-blue-300">Joined Classes</h3>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <?php while ($class = $joined_classes->fetch_assoc()): ?>
