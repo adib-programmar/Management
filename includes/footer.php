@@ -15,7 +15,6 @@
     <!-- Developer Credit -->
     <div class="mt-12">
       <p class="text-center text-gray-300">
-        এই ওয়েবসাইটটি তৈরি করেছে 
         <a href="https://github.com/adib-programmar/" class="text-lime-400 hover:text-lime-300 transition duration-300">
           আদিব আহনাফ আজাদ - ডেভেলপার
           <i class="fab fa-github ml-1 hover:animate-bounce"></i>
@@ -61,5 +60,8 @@
   footer p, footer a {
     position: relative;
     z-index: 1;
+  }
+  .mt-12 a{
+    font-size: 14px;
   }
 </style>
